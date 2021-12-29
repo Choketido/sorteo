@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/chota@latest">
     <style>
-       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Pushster&display=swap');
 
 body {
@@ -15,12 +15,12 @@ body {
     height: auto;
   margin: 0px;
   font-family: "Noto Sans", sans-serif;
-  background: url("https://github.com/Choketido/sorteo/blob/main/wood-g1a9c105ad_1280.jpg?raw=true")
+  background: url("imagenes/wood-g1a9c105ad_1280.jpg")
     no-repeat center center fixed;
     background-position: 30% 10%;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  -webkit-background-size: auto;
+  -moz-background-size: auto;
+  -o-background-size: auto;
   background-size: auto;
 }
 
@@ -46,6 +46,22 @@ h2 {
   border: 1px solid #4b0300;
   cursor: pointer;
   background: #ab3123;
+  background: -moz-linear-gradient(top,  #ab3123 0%, #5d0d0b 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ab3123), color-stop(100%,#5d0d0b));
+  background: -webkit-linear-gradient(top,  #ab3123 0%,#5d0d0b 100%);
+  background: -o-linear-gradient(top,  #ab3123 0%,#5d0d0b 100%);
+  background: -ms-linear-gradient(top,  #ab3123 0%,#5d0d0b 100%);
+  background: linear-gradient(to bottom,  #ab3123 0%,#5d0d0b 100%);
+  -webkit-border-radius: 16px;
+     -moz-border-radius: 16px;
+      border-radius: 16px;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.25);
+     -moz-box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.25);
+      box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.SetUpTree:hover, .SetUpTree:active{
+  opacity: 0.8;
 }
 
 
@@ -152,22 +168,28 @@ h2 {
             Te quiero mucho guapa!!!</p>
     </div>
     <script>
-      let boton = document.getElementById('end');
+let boton = document.getElementById('end');
 let numeros = document.getElementById('result');
 let texto = document.getElementById('texto');
 let random;
 let par1 = document.getElementById('p1');
 let par2 = document.getElementById('p2');
-let regalo1 = true;
-let regalo2 = false;
+let regalos = [
+    'Café en Posada Mercedarios',
+    'Cena en restaurante italiano',
+    'Tarde de cine a elegir',
+    'Merienda en la playa',
+    'Paseo en barco a Vila Real',
+]
 let temporizador = true;
+let contador = 0;
 
 function setTimer() {
-    if(temporizador == true){
-    timer = setInterval("aleatorio()", 25);
-    document.getElementById("end").disabled = false;
-    temporizador = false;
-    }else{
+    if (temporizador == true) {
+        timer = setInterval("aleatorio()", 25);
+        document.getElementById("end").disabled = false;
+        temporizador = false;
+    } else {
         return false;
     }
 }
@@ -179,60 +201,45 @@ function clearTimer() {
 }
 
 function aleatorio() {
-    random = Math.floor(Math.random() * 4 + 1);
+    random = Math.floor(Math.random() * (regalos.length) + 1);
     numeros.value = random;
 }
 
 boton.addEventListener('click', () => {
     clearTimer();
-    let rango = [1, 2, 3, 4, 5];
-    if (regalo1 === true && regalo2 === false) {
+    if (contador === 0) {
         if (numeros.value == 1) {
-            p1.innerHTML = 'Café en Posada Mercedarios';
-            rango.splice(0, 1);
+            p1.innerHTML = regalos[0];
+            regalos.splice(0, 1);
         } else if (numeros.value == 2) {
-            p1.innerHTML = 'Cena en restaurante italiano';
-            rango.splice(1, 1);
+            p1.innerHTML = regalos[1];;
+            regalos.splice(1, 1);
         } else if (numeros.value == 3) {
-            p1.innerHTML = 'Tarde de cine a elegir';
-            rango.splice(2, 1);
+            p1.innerHTML = regalos[2];
+            regalos.splice(2, 1);
         } else if (numeros.value == 4) {
-            p1.innerHTML = 'Merienda en la playa';
-            rango.splice(3, 1);
+            p1.innerHTML = regalos[3];
+            regalos.splice(3, 1);
         } else if (numeros.value == 5) {
-            p1.innerHTML = 'Almuerzo en Osaka';
-            rango.splice(4, 1);
+            p1.innerHTML = regalos[4];
+            regalos.splice(4, 1);
         }
-        regalo1 = false;
-        regalo2 = true;
-    } else if (regalo1 === false && regalo2 === true) {
+        contador++;
+    } else if (contador === 1) {
         if (numeros.value == 1) {
-            p2.innerHTML = 'Café en Posada Mercedarios';
+            p2.innerHTML = regalos[0];
         } else if (numeros.value == 2) {
-            p2.innerHTML = 'Paseo en barco a Vila Real';
+            p2.innerHTML = regalos[1];
         } else if (numeros.value == 3) {
-            p2.innerHTML = 'Tarde de cine a elegir';
+            p2.innerHTML = regalos[2];
         } else if (numeros.value == 4) {
-            p2.innerHTML = 'Merienda en la playa';
+            p2.innerHTML = regalos[3];
         } else if (numeros.value == 5) {
-            p2.innerHTML = 'Almuerzo en Osaka';
+            p2.innerHTML = regalos[4];
         }
         texto.style.visibility = 'visible';
-        regalo1 = false;
-        regalo2 = false;
-    } else if (regalo1 === false && regalo2 === false) {
-        return false;
     }
 });
-
-/*
-setInterval("setTimer()", 2800);
-'Café en Posada Mercedarios';
-'Noche en la Sierra y senderismo';
-'Tarde de cine a elegir';
-'Merienda en la playa';
-'Regalo a elegir';
-*/
     </script>
 </body>
 
