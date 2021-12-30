@@ -162,10 +162,7 @@ h2 {
         <p id="p2"></p>
     </div>
     <div id="texto">
-        <p>Feliz Navidad a la mejor persona del mundo.<br>
-            Espero que esta tontería te guste, y que podamos disfrutar<br>
-            de los planes que te han tocado.<br>
-            Te quiero mucho guapa!!!</p>
+        <p>Lorem ipsum</p>
     </div>
     <script>
 let boton = document.getElementById('end');
@@ -175,11 +172,11 @@ let random;
 let par1 = document.getElementById('p1');
 let par2 = document.getElementById('p2');
 let regalos = [
-    'Café en Posada Mercedarios',
-    'Cena en restaurante italiano',
-    'Tarde de cine a elegir',
-    'Merienda en la playa',
-    'Paseo en barco a Vila Real',
+    'Regalo1',
+    'Regalo2',
+    'Regalo3',
+    'Regalo4',
+    'Regalo5',
 ]
 let temporizador = true;
 let contador = 0;
@@ -237,8 +234,10 @@ boton.addEventListener('click', () => {
         } else if (numeros.value == 5) {
             p2.innerHTML = regalos[4];
         }
+	contador ++
         texto.style.visibility = 'visible';
-    }
+    } else if (contador === 2){
+    	return false;}
 });
     </script>
 </body>
